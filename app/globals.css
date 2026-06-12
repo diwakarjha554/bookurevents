@@ -1,0 +1,263 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   BookUrEvents - "Midnight & Gold" luxury design system
+   ============================================================ */
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-geist-mono);
+
+  /* Brand palette */
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-mute: var(--ink-mute);
+  --color-ivory: var(--ivory);
+  --color-ivory-soft: var(--ivory-soft);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-deep: var(--gold-deep);
+  --color-line: var(--line);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Motion */
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-shimmer: shimmer 6s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* Midnight & Gold tokens */
+  --ink: #0a0a0b;          /* near-black base */
+  --ink-soft: #121113;     /* raised surface */
+  --ink-mute: #1b191d;     /* card / border-bright surface */
+  --ivory: #f4efe3;        /* primary text on dark */
+  --ivory-soft: #b9b2a6;   /* muted text */
+  --gold: #d4af37;         /* champagne gold */
+  --gold-soft: #e8cf8e;    /* light gold / highlight */
+  --gold-deep: #a87d23;    /* deep gold */
+  --line: rgba(212, 175, 55, 0.16); /* hairline gold */
+
+  /* shadcn surface tokens, mapped to dark luxury */
+  --background: #0a0a0b;
+  --foreground: #f4efe3;
+  --card: #121113;
+  --card-foreground: #f4efe3;
+  --popover: #121113;
+  --popover-foreground: #f4efe3;
+  --primary: #d4af37;
+  --primary-foreground: #0a0a0b;
+  --secondary: #1b191d;
+  --secondary-foreground: #f4efe3;
+  --muted: #1b191d;
+  --muted-foreground: #b9b2a6;
+  --accent: #1b191d;
+  --accent-foreground: #f4efe3;
+  --destructive: oklch(0.62 0.21 25);
+  --border: rgba(244, 239, 227, 0.10);
+  --input: rgba(244, 239, 227, 0.14);
+  --ring: rgba(212, 175, 55, 0.55);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    overflow-x: clip;
+  }
+  body {
+    overflow-x: clip;
+    background-color: var(--ink);
+    color: var(--ivory);
+    font-family: var(--font-sans), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  /* Pointer cursor on every interactive element */
+  button:not(:disabled),
+  a,
+  label[for],
+  summary,
+  [role="button"]:not([aria-disabled="true"]),
+  [onclick] {
+    cursor: pointer;
+  }
+  button:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+}
+
+/* ---------- Typography helpers ---------- */
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+  font-optical-sizing: auto;
+}
+.text-gold {
+  color: var(--gold);
+}
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* Gradient gold text */
+.text-gold-grad {
+  background: linear-gradient(120deg, var(--gold-soft) 0%, var(--gold) 45%, var(--gold-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Surfaces & effects ---------- */
+.glass {
+  background: rgba(18, 17, 19, 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.card-luxe {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0));
+  border: 1px solid var(--border);
+  position: relative;
+  transition: border-color 0.5s ease, transform 0.5s ease, background 0.5s ease;
+}
+.card-luxe:hover {
+  border-color: rgba(212, 175, 55, 0.45);
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.06), rgba(255, 255, 255, 0));
+}
+
+.hairline {
+  border-top: 1px solid var(--line);
+}
+
+/* Soft radial glow background (promoted to its own layer for smooth scroll) */
+.glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(55px);
+  pointer-events: none;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Film grain overlay */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Gold shimmer line for buttons / dividers */
+.gold-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* Premium gold button */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, var(--gold-soft), var(--gold) 55%, var(--gold-deep));
+  color: var(--ink);
+}
+.btn-gold::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.55) 50%, transparent 80%);
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+.btn-gold:hover::after {
+  transform: translateX(120%);
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+
+/* Marquee pause on hover */
+.marquee-track {
+  animation: var(--animate-marquee);
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* ---------- Scrollbar (hidden) ---------- */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+html {
+  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;  /* IE / legacy Edge */
+}
+
+/* ---------- Layout container (max 1520px) ---------- */
+@utility container {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 1520px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
