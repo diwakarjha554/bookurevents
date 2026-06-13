@@ -48,7 +48,8 @@ export async function POST(req: Request) {
             },
         });
 
-        const to = process.env.CONTACT_TO || "diwakarjha554@gmail.com";
+        const to = process.env.CONTACT_TO || "info@bookurevents.in";
+        const from = process.env.MAIL_FROM || process.env.SMTP_USER;
 
         const rows: [string, string | undefined][] = [
             ["Name", `${firstName} ${lastName ?? ""}`.trim()],
@@ -79,12 +80,43 @@ export async function POST(req: Request) {
             </div>`;
 
         await transporter.sendMail({
-            from: `"BookUrEvents Website" <${process.env.SMTP_USER}>`,
+            from: `"BookUrEvents Website" <${from}>`,
             to,
             replyTo: email,
             subject: `New Event Enquiry — ${firstName} ${lastName ?? ""} (${eventType})`.trim(),
             html,
         });
+
+        // Confirmation auto-reply to the person who submitted the form.
+        // Wrapped separately so a failure here never fails the main enquiry.
+        try {
+            const confirmHtml = `
+                <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;background:#0a0a0b;color:#f4efe3;padding:40px 32px;border-radius:8px;border:1px solid rgba(212,175,55,0.25)">
+                    <p style="letter-spacing:4px;text-transform:uppercase;color:#d4af37;font-size:12px;margin:0 0 12px">BookUrEvents</p>
+                    <h2 style="color:#f4efe3;font-weight:400;margin:0 0 16px;font-size:26px">Thank you, ${esc(firstName)}.</h2>
+                    <p style="color:#b9b2a6;line-height:1.7;margin:0 0 16px">
+                        We have received your enquiry${eventType ? ` for your <span style="color:#d4af37">${esc(eventType)}</span>` : ""} and it is now with our team.
+                    </p>
+                    <p style="color:#b9b2a6;line-height:1.7;margin:0 0 24px">
+                        One of our event specialists will personally reach out to you <strong style="color:#f4efe3">within 24 hours</strong> with ideas, a clear plan, and a complimentary consultation. We look forward to crafting something unforgettable with you.
+                    </p>
+                    <div style="height:1px;background:linear-gradient(90deg,transparent,#d4af37,transparent);margin:24px 0"></div>
+                    <p style="color:#b9b2a6;line-height:1.7;margin:0 0 4px;font-size:14px">In the meantime, feel free to reach us directly:</p>
+                    <p style="color:#f4efe3;margin:0 0 2px;font-size:14px">📞 +91 8700901115</p>
+                    <p style="color:#f4efe3;margin:0 0 24px;font-size:14px">✉️ info@bookurevents.in</p>
+                    <p style="color:#7a7468;font-size:12px;margin:0">With warm regards,<br/>The BookUrEvents Team</p>
+                </div>`;
+
+            await transporter.sendMail({
+                from: `"BookUrEvents" <${from}>`,
+                to: email,
+                replyTo: "info@bookurevents.in",
+                subject: "We have received your enquiry — BookUrEvents",
+                html: confirmHtml,
+            });
+        } catch (confirmErr) {
+            console.error("Confirmation email failed (enquiry still delivered):", confirmErr);
+        }
 
         return NextResponse.json({ ok: true });
     } catch (err) {

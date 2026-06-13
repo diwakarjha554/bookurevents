@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { DatePicker } from "@/components/ui/date-picker";
 import { Phone, Mail, MapPin, Clock, Send, Loader2 } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 
@@ -121,7 +122,7 @@ export default function Contact() {
 
                                 <div className="space-y-2">
                                     <label className={labelClass}>Event Date (if known)</label>
-                                    <Input name="eventDate" type="date" className={`${fieldClass} [color-scheme:dark]`} />
+                                    <DatePicker name="eventDate" placeholder="Select your event date" />
                                 </div>
 
                                 <div className="space-y-2">

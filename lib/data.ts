@@ -151,7 +151,7 @@ export const DATA = {
         {
             name: "Irshad Pathan",
             role: "Head of Business",
-            image: "",
+            image: "/irshad.jpeg",
             bio: "Irshad leads business strategy and client partnerships at BookUrEvents, turning first conversations into lasting relationships and making sure every client receives the experience they were promised.",
             expertise: ["Business Strategy", "Client Relations", "Partnerships"],
             social: {
@@ -173,7 +173,7 @@ export const DATA = {
             },
         },
         {
-            name: "Aman",
+            name: "Aman Kumar",
             role: "Head of Marketing",
             image: "",
             bio: "Aman drives brand and campaign strategy, helping clients reach the right audience and giving every event the visibility and presence it deserves.",
@@ -185,7 +185,7 @@ export const DATA = {
             },
         },
         {
-            name: "Sujeet Sahani",
+            name: "Sujeet Sahni",
             role: "Head of Technology & Staffing",
             image: "",
             bio: "Sujeet manages technology, staffing, and production support, bringing skilled teams and the right tools together for a flawless event experience every time.",
