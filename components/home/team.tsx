@@ -38,7 +38,7 @@ export default function Team() {
                                             alt={member.name}
                                             fill
                                             sizes="(max-width: 1024px) 50vw, 25vw"
-                                            className="object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                                            className="object-cover object-top grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
                                         />
                                     ) : (
                                         // Premium monogram placeholder (until real photo is added)

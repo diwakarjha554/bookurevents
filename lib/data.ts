@@ -163,7 +163,7 @@ export const DATA = {
         {
             name: "Rishabh Singh Rajput",
             role: "Head of Operations",
-            image: "",
+            image: "/rishabh.jpg",
             bio: "Rishabh oversees on ground execution and logistics, making sure every event runs on schedule and every detail is handled with precision from setup to final wrap.",
             expertise: ["Operations", "Logistics", "Execution"],
             social: {
@@ -175,7 +175,7 @@ export const DATA = {
         {
             name: "Aman Kumar",
             role: "Head of Marketing",
-            image: "",
+            image: "/aman.jpg",
             bio: "Aman drives brand and campaign strategy, helping clients reach the right audience and giving every event the visibility and presence it deserves.",
             expertise: ["Marketing", "Brand Strategy", "Campaigns"],
             social: {
@@ -187,7 +187,7 @@ export const DATA = {
         {
             name: "Sujeet Sahni",
             role: "Head of Technology & Staffing",
-            image: "",
+            image: "/sujeet.png",
             bio: "Sujeet manages technology, staffing, and production support, bringing skilled teams and the right tools together for a flawless event experience every time.",
             expertise: ["Technology", "Staffing", "Production"],
             social: {
