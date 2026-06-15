@@ -19,15 +19,17 @@ export default function Header() {
     const [activeSection, setActiveSection] = useState<string>('home');
     const [isScrolled, setIsScrolled] = useState<boolean>(false);
 
+    // Extract the in-page section id from hrefs like "#about" or "/#about" ("" for plain routes)
+    const sectionOf = (href: string): string => (href.includes('#') ? href.split('#')[1] : '');
+
     const isActive = (href: string): boolean => {
-        if (!href.startsWith('#')) {
-            if (href === '/' && pathname === '/') {
-                return !activeSection;
-            }
+        const section = sectionOf(href);
+        if (!section) {
+            // plain route link (e.g. "/")
+            if (href === '/' && pathname === '/') return !activeSection;
             return pathname === href;
         }
-        const sectionName = href.replace('#', '');
-        return activeSection === sectionName;
+        return pathname === '/' && activeSection === section;
     };
 
     useEffect(() => {
@@ -38,8 +40,8 @@ export default function Header() {
             if (pathname !== '/') return;
 
             const sections = DATA.navlinks
-                .filter(item => item.href.startsWith('#'))
-                .map(item => item.href.replace('#', ''));
+                .map(item => sectionOf(item.href))
+                .filter(Boolean);
 
             let foundActiveSection = false;
             for (let i = sections.length - 1; i >= 0; i--) {
@@ -66,11 +68,7 @@ export default function Header() {
     }, [pathname]);
 
     const handleNavClick = (href: string): void => {
-        if (href.startsWith('#')) {
-            setActiveSection(href.replace('#', ''));
-        } else if (href === '/') {
-            setActiveSection('');
-        }
+        setActiveSection(sectionOf(href));
         setIsMenuOpen(false);
     };
 
@@ -141,7 +139,7 @@ export default function Header() {
                             asChild
                             className="btn-gold rounded-none cursor-pointer text-[13px] tracking-[0.12em] uppercase font-semibold px-6"
                         >
-                            <Link href="#contact" onClick={() => handleNavClick('#contact')}>Plan Your Event</Link>
+                            <Link href="/#contact" onClick={() => handleNavClick('/#contact')}>Plan Your Event</Link>
                         </Button>
                     </div>
 
@@ -178,7 +176,7 @@ export default function Header() {
                                     asChild
                                     className="btn-gold rounded-none cursor-pointer tracking-[0.12em] uppercase font-semibold"
                                 >
-                                    <Link href="#contact" onClick={() => handleNavClick('#contact')}>Plan Your Event</Link>
+                                    <Link href="/#contact" onClick={() => handleNavClick('/#contact')}>Plan Your Event</Link>
                                 </Button>
                             </div>
                         </div>

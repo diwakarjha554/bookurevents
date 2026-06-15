@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { prisma } from "@/lib/prisma";
 
 export const runtime = "nodejs";
 
@@ -27,6 +28,15 @@ export async function POST(req: Request) {
                 { error: "Please fill in your name, email, event type and vision." },
                 { status: 400 }
             );
+        }
+
+        // Persist to DB (best-effort: never block the enquiry if the DB is unavailable)
+        try {
+            await prisma.contactSubmission.create({
+                data: { firstName, lastName, email, phone, eventType, guestCount, eventDate, vision },
+            });
+        } catch (dbErr) {
+            console.error("Contact DB persist failed (continuing):", dbErr);
         }
 
         if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {

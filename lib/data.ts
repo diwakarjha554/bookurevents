@@ -16,10 +16,10 @@ export const DATA = {
     },
     navlinks: [
         { href: '/', label: 'Home' },
-        { href: '#about', label: 'About' },
-        { href: '#services', label: 'Services' },
-        { href: '#portfolio', label: 'Portfolio' },
-        { href: '#contact', label: 'Contact' }
+        { href: '/#about', label: 'About' },
+        { href: '/#services', label: 'Services' },
+        { href: '/#portfolio', label: 'Portfolio' },
+        { href: '/#contact', label: 'Contact' }
     ],
     marquee: [
         "Corporate Galas",

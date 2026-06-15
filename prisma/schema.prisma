@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  AGENT
+}
+
+model User {
+  id           String        @id @default(cuid())
+  name         String
+  email        String        @unique
+  phone        String?
+  upiId        String?
+  qrCodeKey    String? // Backblaze B2 object key for the payment QR image
+  passwordHash String
+  role         Role          @default(AGENT)
+  createdAt    DateTime      @default(now())
+  memberships  EventMember[]
+}
+
+model Event {
+  id          String        @id @default(cuid())
+  title       String
+  date        DateTime
+  venue       String?
+  description String?
+  createdAt   DateTime      @default(now())
+  members     EventMember[]
+}
+
+model EventMember {
+  id              String   @id @default(cuid())
+  event           Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId         String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String
+  pay             Int      @default(0) // pay for this event in INR
+  paid            Boolean  @default(false)
+  paymentProofKey String? // Backblaze B2 object key for payment proof
+  createdAt       DateTime @default(now())
+
+  @@unique([eventId, userId])
+}
+
+model ContactSubmission {
+  id         String   @id @default(cuid())
+  firstName  String
+  lastName   String?
+  email      String
+  phone      String?
+  eventType  String?
+  guestCount String?
+  eventDate  String?
+  vision     String?
+  createdAt  DateTime @default(now())
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model Feedback {
+  id        String   @id @default(cuid())
+  name      String
+  email     String?
+  rating    Int?
+  message   String
+  createdAt DateTime @default(now())
+}

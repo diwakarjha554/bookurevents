@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Mail, Phone, ArrowRight } from "lucide-react";
 import { FaFacebookF, FaXTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa6";
 import Image from "next/image";
+import NewsletterForm from "@/components/newsletter-form";
 
 const Footer = () => {
     return (
@@ -24,15 +23,7 @@ const Footer = () => {
                                 Planning notes, trends, and seasonal offers, sent occasionally. No spam, ever.
                             </p>
                         </div>
-                        <div className="flex gap-3">
-                            <Input
-                                placeholder="Enter your email"
-                                className="h-12 rounded-none border-0 border-b border-[rgba(244,239,227,0.25)] bg-transparent px-0 text-ivory shadow-none placeholder:text-ivory-soft/60 focus-visible:border-gold focus-visible:ring-0"
-                            />
-                            <Button className="btn-gold rounded-none px-6 font-semibold">
-                                <ArrowRight className="h-4 w-4" />
-                            </Button>
-                        </div>
+                        <NewsletterForm />
                     </div>
                 </div>
 
@@ -70,7 +61,7 @@ const Footer = () => {
                     <div>
                         <h3 className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-gold">Explore</h3>
                         <ul className="space-y-3">
-                            {[["About", "#about"], ["Services", "#services"], ["Process", "#portfolio"], ["Contact", "#contact"]].map(([item, href]) => (
+                            {[["About", "/#about"], ["Services", "/#services"], ["Process", "/#process"], ["Contact", "/#contact"]].map(([item, href]) => (
                                 <li key={item}>
                                     <Link href={href} className="group flex items-center text-ivory-soft transition-colors hover:text-gold">
                                         <ArrowRight className="mr-2 h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
@@ -83,23 +74,19 @@ const Footer = () => {
 
                     {/* Legal */}
                     <div>
-                        <h3 className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-gold">Legal</h3>
+                        <h3 className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-gold">Company</h3>
                         <ul className="space-y-3">
-                            {["Privacy Policy", "Terms & Condition", "Refund & Cancellation Policy"].map((service) => {
-                                const href = `${service
-                                    .toLowerCase()
-                                    .replace(/ & /g, "-")
-                                    .replace(/\s+/g, "-")
-                                    .replace(/[^\w-]/g, "")}`;
-                                return (
-                                    <li key={service}>
-                                        <Link href={href} className="group flex items-center text-ivory-soft transition-colors hover:text-gold">
-                                            <ArrowRight className="mr-2 h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
-                                            {service}
-                                        </Link>
-                                    </li>
-                                );
-                            })}
+                            {[
+                                { label: "Terms & Condition", href: "/terms" },
+                                { label: "Feedback", href: "/feedback" },
+                            ].map((item) => (
+                                <li key={item.label}>
+                                    <Link href={item.href} className="group flex items-center text-ivory-soft transition-colors hover:text-gold">
+                                        <ArrowRight className="mr-2 h-3 w-3 opacity-0 transition-opacity group-hover:opacity-100" />
+                                        {item.label}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
 
