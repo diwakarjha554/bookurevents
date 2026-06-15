@@ -104,10 +104,11 @@ export default function Header() {
                             <Image
                                 src="/logo_full_w.png"
                                 alt="BookUrEvents"
-                                width={1000000}
-                                height={1000000}
+                                width={1279}
+                                height={240}
                                 quality={100}
-                                className="w-36 h-[30.4px] object-contain"
+                                priority
+                                className="h-8 w-auto object-contain"
                             />
                         </Link>
                     </div>

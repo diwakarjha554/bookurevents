@@ -37,9 +37,6 @@ export const metadata: Metadata = {
     "premium event company",
     "BookUrEvents",
   ],
-  icons: {
-    icon: [{ url: '/logo.png', type: 'image/png' }],
-  },
 };
 
 export default function RootLayout({

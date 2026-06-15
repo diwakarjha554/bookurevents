@@ -24,10 +24,10 @@ export default async function AdminLayout({ children }: { children: React.ReactN
                             <Image
                                 src="/logo_full_w.png"
                                 alt="BookUrEvents"
-                                width={1000000}
-                                height={1000000}
+                                width={1279}
+                                height={240}
                                 quality={100}
-                                className="h-[28px] w-36 object-contain"
+                                className="h-7 w-auto object-contain"
                             />
                         </Link>
                     </div>

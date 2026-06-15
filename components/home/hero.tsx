@@ -22,7 +22,7 @@ export default function Hero() {
     return (
         <section
             id="home"
-            className="grain relative flex min-h-[100svh] items-center overflow-hidden bg-ink pt-28 pb-20"
+            className="grain relative flex min-h-[100svh] items-center overflow-hidden bg-ink pt-36 pb-20 md:pt-40"
         >
             {/* Background image */}
             <motion.div
@@ -62,26 +62,24 @@ export default function Hero() {
 
                     <motion.h1
                         variants={item}
-                        className="font-display mt-7 text-[clamp(2rem,8vw,5.4rem)] font-light leading-[1.05] tracking-tight text-ivory"
+                        className="font-display mt-5 text-[clamp(2rem,8vw,5.4rem)] font-light leading-[1.05] tracking-tight text-ivory"
                     >
-                        We craft moments
+                        We craft moments that
                         <br />
-                        that{" "}
                         <span className="text-gold-grad italic font-medium">stay with you</span>
                     </motion.h1>
 
                     <motion.p
                         variants={item}
-                        className="mt-8 max-w-2xl text-base leading-relaxed text-ivory-soft sm:text-lg"
+                        className="mt-5 max-w-2xl text-sm leading-relaxed text-ivory-soft sm:text-base md:text-lg xl:w-[1180px] xl:max-w-none"
                     >
-                        From boardroom galas to once in a lifetime weddings, BookUrEvents designs and
-                        delivers extraordinary events across India. Impeccable planning, seamless
-                        execution, and a finish that feels effortless to you.
+                        <span className="xl:whitespace-nowrap">From boardroom galas to once in a lifetime weddings, BookUrEvents designs and delivers extraordinary events across India.</span>{" "}
+                        <span className="xl:whitespace-nowrap">Impeccable planning, seamless execution, and a finish that feels effortless to you.</span>
                     </motion.p>
 
                     <motion.div
                         variants={item}
-                        className="mt-11 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row"
+                        className="mt-8 flex w-full flex-col items-center gap-4 sm:w-auto sm:flex-row"
                     >
                         <Button
                             asChild
@@ -108,7 +106,7 @@ export default function Hero() {
 
                     <motion.div
                         variants={item}
-                        className="mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-ivory-soft"
+                        className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-ivory-soft"
                     >
                         {[
                             ["250+", "Events Delivered"],

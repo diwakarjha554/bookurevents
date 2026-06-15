@@ -34,10 +34,10 @@ const Footer = () => {
                             <Image
                                 src="/logo_full_w.png"
                                 alt="BookUrEvents"
-                                width={1000000}
-                                height={1000000}
+                                width={1279}
+                                height={240}
                                 quality={100}
-                                className="h-[30.4px] w-36 object-contain"
+                                className="h-9 w-auto object-contain"
                             />
                         </Link>
                         <p className="leading-relaxed text-ivory-soft">

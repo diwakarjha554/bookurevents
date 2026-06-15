@@ -30,10 +30,10 @@ const Login = () => {
                         <Image
                             src="/logo_full_w.png"
                             alt="BookUrEvents"
-                            width={1000000}
-                            height={1000000}
+                            width={1279}
+                            height={240}
                             quality={100}
-                            className='h-[30.4px] w-40 object-contain'
+                            className='h-10 w-auto object-contain'
                         />
                         <span className='eyebrow mt-6'>Admin Access</span>
                         <h1 className='font-display mt-3 text-3xl font-light text-ivory'>
