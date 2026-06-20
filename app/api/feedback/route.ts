@@ -70,7 +70,7 @@ export async function POST(req: Request) {
             from: `"BookUrEvents Feedback" <${from}>`,
             to,
             replyTo: email || undefined,
-            subject: `New Feedback — ${name}${rating ? ` (${rating}/5)` : ""}`,
+            subject: `New Feedback - ${name}${rating ? ` (${rating}/5)` : ""}`,
             html,
         });
 

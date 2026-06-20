@@ -45,15 +45,26 @@ const Footer = () => {
                             design, impeccable execution, and an obsession with the details.
                         </p>
                         <div className="flex gap-3">
-                            {[FaInstagram, FaFacebookF, FaXTwitter, FaLinkedinIn].map((Icon, i) => (
-                                <a
-                                    key={i}
-                                    href="#"
-                                    className="grid h-10 w-10 place-items-center rounded-full border border-[rgba(212,175,55,0.3)] text-gold transition-colors hover:bg-gold hover:text-ink"
-                                >
-                                    <Icon className="h-4 w-4" />
-                                </a>
-                            ))}
+                            {[
+                                { Icon: FaInstagram, href: "https://www.instagram.com/bookurevents", label: "Instagram" },
+                                { Icon: FaFacebookF, href: "#", label: "Facebook" },
+                                { Icon: FaXTwitter, href: "#", label: "X" },
+                                { Icon: FaLinkedinIn, href: "#", label: "LinkedIn" },
+                            ].map(({ Icon, href, label }, i) => {
+                                const external = href.startsWith("http");
+                                return (
+                                    <a
+                                        key={i}
+                                        href={href}
+                                        aria-label={label}
+                                        target={external ? "_blank" : undefined}
+                                        rel={external ? "noopener noreferrer" : undefined}
+                                        className="grid h-10 w-10 place-items-center rounded-full border border-[rgba(212,175,55,0.3)] transition-colors hover:bg-gold [&>svg]:fill-gold hover:[&>svg]:fill-ink"
+                                    >
+                                        <Icon className="h-4 w-4 transition-colors" />
+                                    </a>
+                                );
+                            })}
                         </div>
                     </div>
 
@@ -118,11 +129,12 @@ const Footer = () => {
                         <span>
                             Designed with <span className="select-none text-lg text-gold">&hearts;</span> by{' '}
                             <Link
-                                href="https://diwakarjha.vercel.app/"
+                                href="https://www.bitropix.com/"
                                 target="_blank"
+                                rel="noopener noreferrer"
                                 className="font-semibold text-gold transition-colors hover:text-gold-soft"
                             >
-                                Diwakar Jha
+                                Bitropix
                             </Link>
                         </span>
                     </div>

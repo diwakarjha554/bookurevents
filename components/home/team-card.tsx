@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Mail } from "lucide-react";
-import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { FaLinkedinIn } from "react-icons/fa6";
 
 interface Member {
     name: string;
@@ -50,14 +49,8 @@ export default function TeamCard({ member }: { member: Member }) {
                         active ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
                     }`}
                 >
-                    <a href={member.social.linkedin} aria-label={`${member.name} on LinkedIn`} className="grid h-9 w-9 place-items-center rounded-full border border-[rgba(212,175,55,0.4)] bg-ink/80 text-gold transition-colors hover:bg-gold hover:text-ink">
-                        <FaLinkedinIn className="h-3.5 w-3.5" />
-                    </a>
-                    <a href={member.social.twitter} aria-label={`${member.name} on X`} className="grid h-9 w-9 place-items-center rounded-full border border-[rgba(212,175,55,0.4)] bg-ink/80 text-gold transition-colors hover:bg-gold hover:text-ink">
-                        <FaXTwitter className="h-3.5 w-3.5" />
-                    </a>
-                    <a href={`mailto:${member.social.email}`} aria-label={`Email ${member.name}`} className="grid h-9 w-9 place-items-center rounded-full border border-[rgba(212,175,55,0.4)] bg-ink/80 text-gold transition-colors hover:bg-gold hover:text-ink">
-                        <Mail className="h-3.5 w-3.5" />
+                    <a href={member.social.linkedin} aria-label={`${member.name} on LinkedIn`} className="grid h-9 w-9 place-items-center rounded-full border border-[rgba(212,175,55,0.4)] bg-ink/80 transition-colors hover:bg-gold [&>svg]:fill-gold hover:[&>svg]:fill-ink">
+                        <FaLinkedinIn className="h-3.5 w-3.5 transition-colors" />
                     </a>
                 </div>
             </div>

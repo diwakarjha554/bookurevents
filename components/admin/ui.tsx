@@ -50,12 +50,34 @@ export function DbNotice() {
     );
 }
 
-export function StatCard({ label, value, href }: { label: string; value: number; href?: string }) {
+export function StatCard({
+    label,
+    value,
+    href,
+    icon,
+    hint,
+}: {
+    label: string;
+    value: number | string;
+    href?: string;
+    icon?: ReactNode;
+    hint?: string;
+}) {
     const inner = (
-        <div className="card-luxe rounded-sm p-6 transition-colors hover:border-[rgba(212,175,55,0.45)]">
-            <div className="font-display text-4xl text-ivory">{value}</div>
-            <div className="mt-2 text-xs uppercase tracking-[0.16em] text-gold">{label}</div>
+        <div className="card-luxe h-full rounded-sm p-6 transition-colors hover:border-[rgba(212,175,55,0.45)]">
+            <div className="flex items-start justify-between gap-3">
+                <div>
+                    <div className="font-display text-4xl text-ivory">{value}</div>
+                    <div className="mt-2 text-xs uppercase tracking-[0.16em] text-gold">{label}</div>
+                    {hint && <div className="mt-1 text-xs text-ivory-soft">{hint}</div>}
+                </div>
+                {icon && (
+                    <span className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full border border-[rgba(212,175,55,0.3)] text-gold">
+                        {icon}
+                    </span>
+                )}
+            </div>
         </div>
     );
-    return href ? <a href={href}>{inner}</a> : inner;
+    return href ? <a href={href} className="block">{inner}</a> : inner;
 }

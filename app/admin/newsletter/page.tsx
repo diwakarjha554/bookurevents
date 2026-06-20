@@ -1,11 +1,13 @@
 import { prisma } from "@/lib/prisma";
-import { PageHeader, DbNotice, EmptyState, Panel } from "@/components/admin/ui";
+import { PageHeader, DbNotice, EmptyState } from "@/components/admin/ui";
+import NewsletterTable, { type SubscriberRow } from "@/components/admin/tables/newsletter-table";
 
 export const dynamic = "force-dynamic";
 
-async function getData() {
+async function getData(): Promise<SubscriberRow[] | null> {
     try {
-        return await prisma.newsletterSubscriber.findMany({ orderBy: { createdAt: "desc" } });
+        const rows = await prisma.newsletterSubscriber.findMany({ orderBy: { createdAt: "desc" } });
+        return rows.map((r) => ({ id: r.id, email: r.email, createdAt: r.createdAt.toISOString() }));
     } catch {
         return null;
     }
@@ -25,26 +27,7 @@ export default async function NewsletterPage() {
             ) : rows.length === 0 ? (
                 <EmptyState message="No subscribers yet." />
             ) : (
-                <Panel className="overflow-hidden">
-                    <table className="w-full text-sm">
-                        <thead>
-                            <tr className="border-b border-white/10 text-left text-xs uppercase tracking-[0.14em] text-gold">
-                                <th className="px-6 py-4">Email</th>
-                                <th className="px-6 py-4">Subscribed</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {rows.map((r) => (
-                                <tr key={r.id} className="border-b border-white/5 last:border-0">
-                                    <td className="px-6 py-4 text-ivory">{r.email}</td>
-                                    <td className="px-6 py-4 text-ivory-soft">
-                                        {new Date(r.createdAt).toLocaleDateString("en-GB")}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </Panel>
+                <NewsletterTable rows={rows} />
             )}
         </div>
     );

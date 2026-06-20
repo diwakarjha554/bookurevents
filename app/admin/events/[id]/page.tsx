@@ -3,9 +3,8 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { PageHeader, Panel, EmptyState } from "@/components/admin/ui";
 import AssignMemberForm from "@/components/admin/assign-member-form";
-import ConfirmButton from "@/components/admin/confirm-button";
-import { removeMember } from "@/app/admin/actions";
-import { ArrowLeft, MapPin, Trash2, Mail } from "lucide-react";
+import EventMembersTable from "@/components/admin/tables/event-members-table";
+import { ArrowLeft, MapPin } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -72,45 +71,16 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
             {event.members.length === 0 ? (
                 <EmptyState message="No agents assigned to this event yet." />
             ) : (
-                <Panel className="overflow-x-auto">
-                    <table className="w-full text-sm">
-                        <thead>
-                            <tr className="border-b border-white/10 text-left text-xs uppercase tracking-[0.14em] text-gold">
-                                <th className="px-6 py-4">Agent</th>
-                                <th className="px-6 py-4">Pay</th>
-                                <th className="px-6 py-4">Status</th>
-                                <th className="px-6 py-4"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {event.members.map((m) => (
-                                <tr key={m.id} className="border-b border-white/5 last:border-0">
-                                    <td className="px-6 py-4">
-                                        <div className="text-ivory">{m.user.name}</div>
-                                        <a href={`mailto:${m.user.email}`} className="flex items-center gap-1 text-xs text-ivory-soft hover:text-gold">
-                                            <Mail className="h-3 w-3" /> {m.user.email}
-                                        </a>
-                                    </td>
-                                    <td className="px-6 py-4 text-gold">₹ {m.pay.toLocaleString("en-IN")}</td>
-                                    <td className="px-6 py-4">
-                                        <span className={m.paid ? "text-green-400" : "text-ivory-soft"}>
-                                            {m.paid ? "Paid" : "Pending"}
-                                        </span>
-                                    </td>
-                                    <td className="px-6 py-4 text-right">
-                                        <ConfirmButton
-                                            action={removeMember.bind(null, m.id, event.id)}
-                                            message={`Remove ${m.user.name} from this event?`}
-                                            className="text-ivory-soft transition-colors hover:text-red-400"
-                                        >
-                                            <Trash2 className="h-4 w-4" />
-                                        </ConfirmButton>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </Panel>
+                <EventMembersTable
+                    rows={event.members.map((m) => ({
+                        id: m.id,
+                        eventId: event.id,
+                        name: m.user.name,
+                        email: m.user.email,
+                        pay: m.pay,
+                        paid: m.paid,
+                    }))}
+                />
             )}
         </div>
     );

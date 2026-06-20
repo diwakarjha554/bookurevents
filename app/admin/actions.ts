@@ -113,7 +113,7 @@ export async function assignMember(_prev: Result, fd: FormData): Promise<Result>
         try {
             await sendMail({
                 to: user.email,
-                subject: `You're assigned to an event — ${event.title}`,
+                subject: `You're assigned to an event - ${event.title}`,
                 html: `
                     <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;background:#0a0a0b;color:#f4efe3;padding:36px 32px;border-radius:8px;border:1px solid rgba(212,175,55,0.25)">
                         <p style="letter-spacing:4px;text-transform:uppercase;color:#d4af37;font-size:12px;margin:0 0 12px">BookUrEvents</p>

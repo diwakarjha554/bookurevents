@@ -93,7 +93,7 @@ export async function POST(req: Request) {
             from: `"BookUrEvents Website" <${from}>`,
             to,
             replyTo: email,
-            subject: `New Event Enquiry — ${firstName} ${lastName ?? ""} (${eventType})`.trim(),
+            subject: `New Event Enquiry - ${firstName} ${lastName ?? ""} (${eventType})`.trim(),
             html,
         });
 
@@ -121,7 +121,7 @@ export async function POST(req: Request) {
                 from: `"BookUrEvents" <${from}>`,
                 to: email,
                 replyTo: "info@bookurevents.in",
-                subject: "We have received your enquiry — BookUrEvents",
+                subject: "We have received your enquiry - BookUrEvents",
                 html: confirmHtml,
             });
         } catch (confirmErr) {

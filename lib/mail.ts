@@ -16,7 +16,7 @@ function transporter() {
 
 export async function sendMail(opts: { to: string; subject: string; html: string; replyTo?: string }) {
     if (!isMailConfigured()) {
-        console.error("SMTP not configured — skipping email to", opts.to);
+        console.error("SMTP not configured - skipping email to", opts.to);
         return false;
     }
     const from = process.env.MAIL_FROM || process.env.SMTP_USER;
